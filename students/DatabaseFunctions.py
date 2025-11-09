@@ -26,3 +26,18 @@ def updateStudentEmail(student_id: str, new_email: str) -> Student:
     # Update
     student = Student.objects.update(student_id=student_id, email=new_email)
     return student
+
+def deleteStudent(student_id: str) -> Student:
+    # Validate input
+    if not all([student_id]):
+        raise Exception("Missing required fields")
+
+    # Delete
+    try:
+        student = Student.objects.get(student_id=student_id)
+        student.delete()
+        return student
+    except Student.DoesNotExist:
+        raise Exception("Student not found in database.")
+    except Exception:
+        raise Exception("Failed to delete student.")

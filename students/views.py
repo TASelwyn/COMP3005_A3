@@ -33,7 +33,7 @@ def addStudent(request):
         return HttpResponseBadRequest(str(e))
 
 # Update Students
-def updateStudentEmail(request):
+def updateStudent(request):
     # Must be POST
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
@@ -46,6 +46,22 @@ def updateStudentEmail(request):
         # Update email and return
         student = updateStudentEmail(student_id, new_email)
         return JsonResponse({"student_id": student.student_id, "message": "Successfully updated " + student.first_name + "'s email with " + student.email})
+
+    except Exception as e:
+        return HttpResponseBadRequest(str(e))
+
+def deleteStudent(request):
+    # Must be POST
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+
+    try:
+        # Decode body (x-www-form-urlencoded)
+        student_id = request.POST.get("student_id")
+
+        # Delete Student and return
+        student = deleteStudent(student_id)
+        return JsonResponse({"email": student.email, "message": "Successfully deleted " + student.email + "'s from the database "})
 
     except Exception as e:
         return HttpResponseBadRequest(str(e))
