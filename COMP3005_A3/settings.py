@@ -75,8 +75,12 @@ WSGI_APPLICATION = "COMP3005_A3.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "comp3005a3",
+        "USER": "comp3005",
+        "PASSWORD": "password",
+        "HOST": "127.0.0.1",
+        "PORT": "8642",
     }
 }
 
