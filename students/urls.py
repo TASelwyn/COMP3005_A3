@@ -5,6 +5,6 @@ urlpatterns = [
     path("", views.showStudentUI, name="ui"),
     path("read", views.getStudents, name="read"),
     path("add", views.addStudent, name="add"),
-    path("update", views.updateStudent, name="update"),
-    path("delete", views.deleteStudent, name="delete")
+    path("update/<int:student_id>", views.updateStudent, name="update"),
+    path("delete/<int:student_id>", views.deleteStudent, name="delete")
 ]

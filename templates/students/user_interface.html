@@ -11,6 +11,7 @@
                 <th align="left">Last Name</th>
                 <th align="left">Email</th>
                 <th align="left">Enrollment Date</th>
+                <th>Actions</th>
             </tr>
             {% for s in students %}
             <tr>
@@ -19,6 +20,13 @@
                 <td>{{ s.last_name }}</td>
                 <td>{{ s.email }}</td>
                 <td>{{ s.enrollment_date|date:"Y-m-d" }}</td>
+                <td>
+                    <form method="POST" action="/delete/{{  s.student_id }}">
+                        {% csrf_token %}
+                        <button type="submit">X</button>
+                    </form>
+                    
+                </td>
             </tr>
             {% empty %}
             <tr>
@@ -36,6 +44,7 @@
                     <td><button type="submit">Add</button></td>
                 </tr>
             </form>
+        
         </table>
     </body>
 </html>
