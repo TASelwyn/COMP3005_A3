@@ -12,11 +12,15 @@ Django provides abstraction models for ORM, and thus no raw sql will be used for
 ```docker compose up -d```
 2. Install python dependencies
 ```pip install -r requirements.txt```
-3. Update Django migrations
-```python manage.py makemigrations```
-4. Apply Django migrations
+4. Apply Django migrations to create and populate database
 ```python manage.py migrate```
 5. Load initial data from file
 ```python manage.py loaddata initial_data.json```
 6. Run application
 ```python manage.py runserver```
+
+## Resetting database
+1. Running migrations back to 0001 (table creation) will undo everything to the database.
+```python manage.py migrate students 0001```
+2. Running migrations will populate students back
+```python manage.py migrate ```

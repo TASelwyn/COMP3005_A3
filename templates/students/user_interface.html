@@ -21,11 +21,14 @@
                 <td>{{ s.email }}</td>
                 <td>{{ s.enrollment_date|date:"Y-m-d" }}</td>
                 <td>
-                    <form method="POST" action="/delete/{{  s.student_id }}">
+                    <form method="GET" action="/update/{{  s.student_id }}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Update</button>
+                    </form>
+                    <form method="POST" action="/delete/{{  s.student_id }}" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit">X</button>
                     </form>
-                    
                 </td>
             </tr>
             {% empty %}
@@ -44,7 +47,7 @@
                     <td><button type="submit">Add</button></td>
                 </tr>
             </form>
-        
+
         </table>
     </body>
 </html>

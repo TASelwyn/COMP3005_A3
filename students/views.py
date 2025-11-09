@@ -25,37 +25,41 @@ def addStudent(request):
 
         # Add student and return
         student = postgres.addStudent(first_name, last_name, email, enrollment_date)
-        return JsonResponse({"student_id": student.student_id, "message": "Successfully added student"})
+        return JsonResponse({"student_id": student.student_id, "message": "Successfully created " + first_name + " " + last_name + "."})
 
     except Exception as e:
         return HttpResponseBadRequest(str(e))
 
 # Update Students
 def updateStudent(request, student_id):
-    # Must be POST
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
+    # Must be POST/GET
+    if not request.method in ["GET", "POST"]:
+        return HttpResponseNotAllowed(["POST", "GET"])
 
-    try:
-        # Decode body (x-www-form-urlencoded)
-        new_email = request.POST.get("new_email")
+    if request.method == "POST":
+        try:
+            # Decode body (x-www-form-urlencoded)
+            new_email = request.POST.get("email")
 
-        # Update email and return
-        student = postgres.updateStudentEmail(student_id, new_email)
-        return JsonResponse({"student_id": student.student_id, "message": "Successfully updated " + student.first_name + "'s email with " + student.email})
+            # Update email and return
+            student = postgres.updateStudentEmail(student_id, new_email)
+            return JsonResponse({"student_id": student.student_id, "message": "Successfully updated " + student.first_name + "'s email with " + student.email})
 
-    except Exception as e:
-        return HttpResponseBadRequest(str(e))
+        except Exception as e:
+            return HttpResponseBadRequest(str(e))
+
+    if request.method == "GET":
+        return render(request, "students/update_email.html", {"student": postgres.getStudent(student_id)})
 
 def deleteStudent(request, student_id):
-    # Must be POST
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
+    # Must be POST/GET
+    if not request.method in ["GET", "POST"]:
+        return HttpResponseNotAllowed(["POST", "GET"])
 
     try:
         # Delete Student and return
         student = postgres.deleteStudent(student_id)
-        return JsonResponse({"email": student.email, "message": "Successfully deleted " + student.first_name + " " + student.last_name + " from the database "})
+        return JsonResponse({"email": student.email, "message": "Successfully deleted " + student.first_name + " " + student.last_name + " from the database"})
 
     except Exception as e:
         return HttpResponseBadRequest(str(e))
