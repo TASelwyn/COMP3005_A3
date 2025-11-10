@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("students", "0002_alter_student_table"),
+        ("students", "0001_initial"),
     ]
 
     operations = [
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
                 ('Jim', 'Beam', 'jim.beam@example.com', '2023-09-02');
             """,
             reverse_sql="""
-                TRUNCATE TABLE students_student RESTART IDENTITY CASCADE;
+                TRUNCATE TABLE students RESTART IDENTITY CASCADE;
             """,
         ),
     ]
