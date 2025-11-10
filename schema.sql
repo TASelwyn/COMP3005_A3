@@ -12,12 +12,13 @@ CREATE TABLE students (
 /*
  (C) add student
  */
-INSERT INTO students (first_name, last_name, email, enrollment_date) VALUES ("Thomas", "Selwyn", "thomas@selwyn.tech", "2020-09-01")
+INSERT INTO students(first_name, last_name, email, enrollment_date) VALUES ("Thomas", "Selwyn", "thomas@selwyn.tech", "2020-09-01");
 
 /*
  (R) get all students
  */
 SELECT * FROM students;
+
 /* get single student */
 SELECT * FROM students WHERE email = 'thomas@selwyn.tech';
 
