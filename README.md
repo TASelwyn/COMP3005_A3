@@ -8,9 +8,9 @@ Implement a PostgreSQL database using the provided schema and write an applicati
 
 ## Comment
 Due to the final project being allowed to use ORM, I implemented this using ORM. The assignment page does not mention whether we are allowed to use it.
-In light of this, I populated "schema.sql" with all the necessary SQL statements in order to do the CRUD operations.
+In light of this, I populated "schema.sql" with all the necessary SQL statements in order to do the CRUD operations. Additionally and with that in mind, the database is configured to use postgres in COMP3005_A3/settings.py thus meeting the "PostgreSQL" database requirement.
 
-Additionally and with that in mind, the database is configured to use postgres in COMP3005_A3/settings.py thus meeting the "PostgreSQL" database requirement.
+https://youtu.be/ewENe9Veqo
 
 ## Technologies Used
 - Python 3.11
