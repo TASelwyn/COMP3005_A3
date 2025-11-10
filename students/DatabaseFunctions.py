@@ -1,5 +1,13 @@
+# COMP 3005 Assignment 3
+#
+# Author: Thomas Selwyn
+# Date: November 2025
+#
+# Implementation for all required application functions (and an extra getStudent)
+# These are intended to meet the criteria of the assignment.
+# They are implemented as helper functions for the API in order to perform the database changes.
+#
 from .models import Student
-
 
 def getStudent(student_id: str) -> Student:
     try:

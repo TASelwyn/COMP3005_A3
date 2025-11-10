@@ -1,16 +1,24 @@
+# COMP 3005 Assignment 3
+#
+# Author: Thomas Selwyn
+# Date: November 2025
+#
+# This file responds to all http endpoints with the appropriate function according to urls.py
+# As far as the assignment goes, this is all just to "demonstrate" the functionality and not the actual functionality.
+#
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed, HttpResponseBadRequest
 from students import DatabaseFunctions as postgres
 
-# Show student UI
+# Show student user interface
 def showStudentUI(request):
     return render(request, "students/user_interface.html", {"students": postgres.getAllStudents()})
 
-# GET Students
+# API Endpoint GET list
 def getStudents(request):
     return JsonResponse(postgres.getAllStudents(), safe=False, json_dumps_params={'indent': 4})
 
-# ADD Students
+# API Endpoint POST add
 def addStudent(request):
     # Must be POST
     if request.method != "POST":
@@ -30,7 +38,8 @@ def addStudent(request):
     except Exception as e:
         return HttpResponseBadRequest(str(e))
 
-# Update Students
+# API Endpoint POST update/<int:student_id>
+# Show update page to user on GET
 def updateStudent(request, student_id):
     # Must be POST/GET
     if not request.method in ["GET", "POST"]:
@@ -43,7 +52,7 @@ def updateStudent(request, student_id):
 
             # Update email and return
             student = postgres.updateStudentEmail(student_id, new_email)
-            return JsonResponse({"student_id": student.student_id, "message": "Successfully updated " + student.first_name + "'s email with " + student.email})
+            return JsonResponse({"student_id": student.student_id, "message": "Successfully updated " + str(student) + "'s email with " + student.email})
 
         except Exception as e:
             return HttpResponseBadRequest(str(e))
@@ -51,15 +60,16 @@ def updateStudent(request, student_id):
     if request.method == "GET":
         return render(request, "students/update_email.html", {"student": postgres.getStudent(student_id)})
 
+# API Endpoint DELETE delete/<int:student_id>
 def deleteStudent(request, student_id):
-    # Must be POST/GET
-    if not request.method in ["GET", "POST"]:
-        return HttpResponseNotAllowed(["POST", "GET"])
+    # Must be POST/GET/DELETE
+    if not request.method in ["GET", "POST", "DELETE"]:
+        return HttpResponseNotAllowed(["POST", "GET", "DELETE"])
 
     try:
         # Delete Student and return
         student = postgres.deleteStudent(student_id)
-        return JsonResponse({"email": student.email, "message": "Successfully deleted " + student.first_name + " " + student.last_name + " from the database"})
+        return JsonResponse({"email": student.email, "message": "Successfully deleted " + str(student) + " from the database"})
 
     except Exception as e:
         return HttpResponseBadRequest(str(e))

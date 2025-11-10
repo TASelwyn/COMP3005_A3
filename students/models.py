@@ -1,3 +1,8 @@
+# COMP 3005 Assignment 3
+#
+# Author: Thomas Selwyn
+# Date: November 2025
+#
 from django.db import models
 
 class Student(models.Model):

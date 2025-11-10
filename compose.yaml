@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:18-trixie
     environment:
       POSTGRES_DB: comp3005a3
       POSTGRES_USER: comp3005
