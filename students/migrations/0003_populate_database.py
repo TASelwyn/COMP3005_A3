@@ -5,12 +5,12 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("students", "0001_initial"),
+        ("students", "0002_alter_student_table"),
     ]
 
     operations = [
         migrations.RunSQL(
-            sql="""INSERT INTO students_student (first_name, last_name, email, enrollment_date) VALUES
+            sql="""INSERT INTO students (first_name, last_name, email, enrollment_date) VALUES
                 ('John', 'Doe', 'john.doe@example.com', '2023-09-01'),
                 ('Jane', 'Smith', 'jane.smith@example.com', '2023-09-01'),
                 ('Jim', 'Beam', 'jim.beam@example.com', '2023-09-02');
